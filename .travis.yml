@@ -11,7 +11,7 @@ deploy:
     upload-dir: nerves-sdk
     storage_class: "REDUCED_REDUNDANCY"  # doesn't work yet
 
-script: cp README.md build-product.txt
+script: echo "Commit $TRAVIS_COMMIT" > build-product.txt
 
 before_deploy: ./ci-deploy.sh
 
