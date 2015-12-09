@@ -10,6 +10,9 @@ deploy:
     local_dir: artifacts
     upload-dir: nerves-sdk
     storage_class: "REDUCED_REDUNDANCY"  # doesn't work yet
+    on:
+        all_branches: true
+        tags: true
 
 script: echo "Commit $TRAVIS_COMMIT" > build-product.txt
 
