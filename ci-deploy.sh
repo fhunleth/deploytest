@@ -1,8 +1,8 @@
 #!/bin/sh
 
 # Check if we're building under Travis-ci
-if [ $TRAVIS = true ]; then
-    if [ $TRAVIS_TAG ]; then
+if [ "$TRAVIS" = "true" ]; then
+    if [ -n $TRAVIS_TAG ]; then
         BRANCH_OR_TAG=$TRAVIS_TAG
     else
         BRANCH_OR_TAG=$TRAVIS_BRANCH
@@ -13,5 +13,6 @@ fi
 
 SYSTEM_ARCHIVE_NAME=deploytest-$BRANCH_OR_TAG
 
+rm -fr artifacts
 mkdir artifacts
 cp README.md artifacts/$SYSTEM_ARCHIVE_NAME.txt
