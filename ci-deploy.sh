@@ -2,7 +2,10 @@
 
 # Check if we're building under Travis-ci
 if [ "$TRAVIS" = "true" ]; then
-    if [ -n $TRAVIS_TAG ]; then
+    echo "TAG=$TRAVIS_TAG"
+    echo "BRANCH=$TRAVIS_BRANCH"
+
+    if [ -n "$TRAVIS_TAG" ]; then
         BRANCH_OR_TAG=$TRAVIS_TAG
     else
         BRANCH_OR_TAG=$TRAVIS_BRANCH
