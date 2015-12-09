@@ -7,9 +7,10 @@ if [ $TRAVIS = true ]; then
     else
         BRANCH_OR_TAG=$TRAVIS_BRANCH
     fi
+else
+    BRANCH_OR_TAG=$(git describe --exact-match 2>/dev/null || git rev-parse --abbrev-ref HEAD)
 fi
 
-BRANCH_OR_TAG=$(git describe --exact-match 2>/dev/null || git rev-parse --abbrev-ref HEAD)
 SYSTEM_ARCHIVE_NAME=deploytest-$BRANCH_OR_TAG
 
 mkdir artifacts
