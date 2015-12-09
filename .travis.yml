@@ -11,7 +11,9 @@ deploy:
     upload-dir: nerves-sdk
     storage_class: "REDUCED_REDUNDANCY"  # doesn't work yet
 
-script: bash ci.sh
+script: cp README.md build-product.txt
+
+before_deploy: ./ci-deploy.sh
 
 #branches:
 #    only:
