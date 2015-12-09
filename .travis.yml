@@ -1,6 +1,20 @@
 language: c
 sudo: false
 
+script: echo "Commit $TRAVIS_COMMIT" > build-product.txt
+
+before_deploy: bash ./ci-deploy.sh
+
+deploy:
+  provider: releases
+  api_key:
+    secure: BhdQj1EBDMGqVNEJlT8H0EK0fLE08dQbWvbqGMUDX7WEbW5wxwH/DJk1rau0wlPT8C4VOjin0/aFscb28KdSZ2aJ9rSWezu7lV1p83xIVoyFdVcFiFCIkAzSmghv65w12susFBhoyJe7WNKVZYcupH3De+Q+otETLxLvHI6Iujr0QwMySlMutm7ELPBxeq9bgOMJH3AJxnnqi/5ADDuHkXUNUCbEOTYq9CKfW4VeyKiX5XReqvZzBdEvO1immDmVEZ895UIV1j1+sdrlyEEn5ys6yoCYvkH1eGJkvFepKvyR88zEQqNoq7a+PJkyKHNQ/Kowyj6VtK5lTlFSg5zd7N9yfaWVzrn6gwQKxU3udAgTcxu+9r6QowmRuYLoDaMhjrJvp3nPZulng1hIMNvS1BNvAJWKH6xIfLlyFPc/93UPtB4cMg2bVnLJ4nDorZ+7KcusEYjvnk97gaqOFThBqDpe5Wg2bojbGg/3XtzjTkfYdXo5SQn3ZccdgJ6PTKXGwJcdVF/ros/DWTRKNcjWB01dNmW3L7AJK8f1cdQ6SsGot6tpnMM5WZHdymsNidWnZKF3asjPNksq7YEslTj9PbeHWDaDP1s9PoAO43k4PvbyDHKeWQvi8HXoiy62g1cdyt5nAuJqk00h1L6gm+bx2YMujWpwpix52WBp9Uw8S7w=
+  file: "artifacts/*"
+  skip_cleanup: true
+  on:
+    repo: fhunleth/deploytest
+    tags: true
+
 deploy:
     provider: s3
     access_key_id: $ARTIFACTS_KEY
@@ -12,13 +26,4 @@ deploy:
     storage_class: "REDUCED_REDUNDANCY"  # doesn't work yet
     on:
         all_branches: true
-
-script: echo "Commit $TRAVIS_COMMIT" > build-product.txt
-
-before_deploy: ./ci-deploy.sh
-
-#branches:
-#    only:
-#        - master
-
 
