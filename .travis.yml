@@ -1,11 +1,17 @@
 language: c
 sudo: false
-addons:
-    artifacts:
-        paths:
-          - artifacts
 
-script: mkdir artifacts && cp README.md artifacts
+deploy:
+    provider: s3
+    access_key_id: $ARTIFACTS_KEY
+    secret_access_key: $ARTIFACTS_SECRET
+    bucket: $ARTIFACTS_BUCKET
+    skip_cleanup: true
+    local_dir: artifacts
+    upload-dir: nerves-sdk
+    storage_class: "REDUCED_REDUNDANCY"
+
+script: mkdir artifacts && cp README.md artifacts/deploytest.txt
 
 #branches:
 #    only:
